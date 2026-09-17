@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { GalleryGrid, PageIntro } from "@/components/sections";
+export const Route=createFileRoute("/gallery")({head:()=>({meta:[{title:"Manufacturing Gallery | Nexus Autocomps"},{name:"description",content:"See precision machining, press shop operations, fabrication, inspection and automotive components."},{property:"og:title",content:"Manufacturing Gallery | Nexus Autocomps"},{property:"og:description",content:"A closer look at our manufacturing environment and processes."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:Gallery});
+function Gallery(){return <main><PageIntro eyebrow="Gallery" title="Manufacturing in action." copy="Inside the processes, equipment and production discipline behind every component."/><section className="py-20"><div className="mx-auto max-w-7xl px-5 lg:px-8"><GalleryGrid/></div></section></main>}

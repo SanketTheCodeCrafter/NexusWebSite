@@ -1,0 +1,10 @@
+import { useState } from "react";
+import { CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+export function ContactForm() {
+  const [sent,setSent] = useState(false);
+  if(sent) return <div className="border border-border bg-card p-10 text-center"><CheckCircle2 className="mx-auto size-10 text-primary"/><h2 className="mt-4 text-3xl font-bold uppercase">Enquiry received</h2><p className="mt-3 text-muted-foreground">Thank you. Our engineering team will review your requirement.</p></div>;
+  return <form className="grid gap-5 border border-border bg-card p-6 sm:grid-cols-2 lg:p-9" onSubmit={(e)=>{e.preventDefault();setSent(true)}}><Field label="Name" name="name" required/><Field label="Company" name="company" required/><Field label="Email" name="email" type="email" required/><Field label="Phone" name="phone" type="tel" required/><label className="grid gap-2 text-xs font-bold uppercase sm:col-span-2">Requirement<select required name="requirement" className="h-12 border border-input bg-background px-3 text-sm font-normal"><option value="">Select a capability</option><option>Press Shop</option><option>CNC Turning</option><option>VMC Machining</option><option>Fabrication & Welding</option><option>Component Manufacturing</option></select></label><label className="grid gap-2 text-xs font-bold uppercase sm:col-span-2">Message<textarea required name="message" rows={5} className="border border-input bg-background p-3 text-sm font-normal" placeholder="Tell us about the component, material, volume and target timeline"/></label><Button type="submit" variant="industrial" size="lg" className="sm:col-span-2 sm:justify-self-start">Submit enquiry</Button></form>;
+}
+function Field({label,name,type="text",required}:{label:string;name:string;type?:string;required?:boolean}){return <label className="grid gap-2 text-xs font-bold uppercase">{label}<input name={name} type={type} required={required} className="h-12 border border-input bg-background px-3 text-sm font-normal"/></label>}
