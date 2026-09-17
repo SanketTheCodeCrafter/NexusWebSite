@@ -1,24 +1,31 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowDown, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CTASection, FeatureStrip, GalleryGrid, ProcessTimeline, ProductGrid, SectionHeading, ServiceGrid } from "@/components/sections";
+import { media, posts } from "@/lib/site-data";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({ meta: [
+    { title: "Nexus Autocomps | Precision Engineering" },
+    { name: "description", content: "Advanced precision engineering and automotive component manufacturing from Nexus Autocomps." },
+    { property: "og:title", content: "Nexus Autocomps | Precision Engineering" },
+    { property: "og:description", content: "Advanced precision engineering and automotive component manufacturing." },
+    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
+  ]}), component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+function Index() { return <main>
+  <section className="relative flex min-h-[94vh] items-end overflow-hidden bg-secondary text-secondary-foreground">
+    <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline poster={media.hero} aria-label="Precision CNC machining in progress"><source src="https://videos.pexels.com/video-files/4488706/4488706-hd_1920_1080_25fps.mp4" type="video/mp4"/></video>
+    <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/65 to-secondary/20"/><div className="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-secondary/40"/>
+    <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-36 lg:px-8 lg:pb-20"><div className="reveal-up text-xs font-bold uppercase text-primary">Precision Engineering <span className="mx-2 text-secondary-foreground/35">•</span> Advanced Manufacturing</div><h1 className="reveal-up mt-5 max-w-5xl text-6xl font-extrabold uppercase leading-[.86] sm:text-8xl lg:text-[7.5rem]">Engineered for precision.<br/><span className="text-primary">Built for performance.</span></h1><p className="reveal-up mt-7 max-w-xl text-base leading-7 text-secondary-foreground/70">Advanced manufacturing and precision engineering solutions for demanding industrial and automotive applications.</p><div className="reveal-up mt-8 flex flex-wrap gap-3"><Button asChild variant="industrial" size="lg"><Link to="/services">Explore Services <ArrowRight/></Link></Button><Button asChild variant="industrialOutline" size="lg"><Link to="/contact">Enquire Now</Link></Button></div><div className="mt-12 flex items-center gap-3 text-[10px] font-bold uppercase text-secondary-foreground/50"><ArrowDown className="size-4 text-primary"/> Scroll to explore</div></div>
+  </section>
+  <section className="py-20 lg:py-28"><div className="mx-auto grid max-w-7xl items-center gap-12 px-5 lg:grid-cols-2 lg:px-8"><div className="relative"><img src={media.quality} alt="Nexus manufacturing quality inspection" width={1536} height={1024} loading="lazy" className="aspect-[4/3] w-full object-cover"/><div className="absolute -bottom-6 right-0 bg-primary px-6 py-5 text-primary-foreground"><strong className="font-display text-4xl">100%</strong><span className="ml-3 text-xs font-bold uppercase">Quality focused</span></div></div><div><SectionHeading label="Who we are" title="Precision manufacturing. Engineering excellence." copy="Nexus Autocomps combines modern machining, forming and fabrication capability with disciplined process control. We help customers translate demanding component requirements into repeatable production outcomes."/><ul className="mt-7 grid gap-3 text-sm sm:grid-cols-2">{["Process-led manufacturing","Application engineering","Production repeatability","Quality at every stage"].map(x=><li key={x} className="flex gap-2"><CheckCircle2 className="size-5 text-primary"/>{x}</li>)}</ul><Button asChild variant="industrial" size="lg" className="mt-8"><Link to="/about">Discover more <ArrowRight/></Link></Button></div></div></section>
+  <section className="bg-muted py-20 lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading label="Our services" title="Capability across the manufacturing cycle"/><ServiceGrid/></div></section>
+  <section className="bg-secondary py-20 lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading light label="Manufacturing process" title="From raw material to finished component" copy="A connected production pathway built around control, traceability and consistent execution."/><ProcessTimeline/></div></section>
+  <section className="py-20 lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading label="Our products" title="Components made for demanding applications"/><ProductGrid compact/><div className="mt-10"><Button asChild variant="outline" size="lg"><Link to="/products">View product catalogue <ArrowRight/></Link></Button></div></div></section>
+  <section className="bg-muted py-20 lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading label="Manufacturing in action" title="Built on the factory floor"/><GalleryGrid compact/></div></section>
+  <section className="py-20 lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading label="Why Nexus" title="Built around precision"/><FeatureStrip/></div></section>
+  <section className="bg-secondary py-20 text-secondary-foreground lg:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading light label="Latest insights" title="Ideas from the engineering floor"/><div className="mt-12 grid gap-px bg-secondary-foreground/15 md:grid-cols-3">{posts.map(p=><article key={p.title} className="group bg-secondary"><img src={p.image} alt={p.title} width={1536} height={1024} loading="lazy" className="aspect-[16/10] w-full object-cover"/><div className="p-6"><div className="text-[10px] font-bold uppercase text-primary">{p.category} · {p.date}</div><h3 className="mt-3 text-2xl font-bold uppercase">{p.title}</h3><Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase text-primary">Read more <ArrowRight className="size-4"/></Link></div></article>)}</div></div></section>
+  <CTASection/>
+</main> }
