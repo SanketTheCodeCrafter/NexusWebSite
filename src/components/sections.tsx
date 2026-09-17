@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Gauge, Layers3, ShieldCheck, Timer, X, ZoomIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { gallery, products, services } from "@/lib/site-data";
+import { gallery, media, products, services } from "@/lib/site-data";
 
 export function SectionHeading({ label, title, copy, light = false }: { label: string; title: string; copy?: string; light?: boolean }) {
   return <div className="max-w-3xl"><div className="mb-4 flex items-center gap-3 text-xs font-bold uppercase text-primary"><span className="h-px w-8 bg-primary" />{label}</div><h2 className={`text-4xl font-bold uppercase leading-none sm:text-5xl lg:text-6xl ${light ? "text-secondary-foreground" : "text-foreground"}`}>{title}</h2>{copy && <p className={`mt-5 max-w-2xl text-base leading-7 ${light ? "text-secondary-foreground/65" : "text-muted-foreground"}`}>{copy}</p>}</div>;
@@ -29,7 +29,8 @@ const processSteps = [
 
 export function ProcessTimeline() {
   const [active, setActive] = useState(0);
-  return <div className="mt-12"><div className="grid gap-px bg-secondary-foreground/15 md:grid-cols-7">{processSteps.map(([title],i) => <button key={title} onClick={() => setActive(i)} className={`min-h-20 border-l-2 px-4 py-4 text-left text-xs font-bold uppercase transition ${active===i ? "border-primary bg-primary text-primary-foreground" : "border-transparent bg-secondary text-secondary-foreground/55 hover:text-secondary-foreground"}`}><span className="mb-2 block text-[10px] opacity-55">0{i+1}</span>{title}</button>)}</div><div className="grid items-stretch bg-secondary-foreground/5 md:grid-cols-2"><div className="p-8 lg:p-12"><div className="text-xs font-bold uppercase text-primary">Current stage / 0{active+1}</div><h3 className="mt-4 text-4xl font-bold uppercase text-secondary-foreground">{processSteps[active][0]}</h3><p className="mt-5 max-w-md leading-7 text-secondary-foreground/65">{processSteps[active][1]}</p></div><img src={active < 2 ? services[0].image : active < 5 ? services[1].image : services[5].image} alt={`${processSteps[active][0]} process`} width={1536} height={1024} loading="lazy" className="h-72 w-full object-cover md:h-full"/></div></div>;
+  const current = processSteps[active] ?? processSteps[0];
+  return <div className="mt-12"><div className="grid gap-px bg-secondary-foreground/15 md:grid-cols-7">{processSteps.map(([title],i) => <button key={title} onClick={() => setActive(i)} className={`min-h-20 border-l-2 px-4 py-4 text-left text-xs font-bold uppercase transition ${active===i ? "border-primary bg-primary text-primary-foreground" : "border-transparent bg-secondary text-secondary-foreground/55 hover:text-secondary-foreground"}`}><span className="mb-2 block text-[10px] opacity-55">0{i+1}</span>{title}</button>)}</div><div className="grid items-stretch bg-secondary-foreground/5 md:grid-cols-2"><div className="p-8 lg:p-12"><div className="text-xs font-bold uppercase text-primary">Current stage / 0{active+1}</div><h3 className="mt-4 text-4xl font-bold uppercase text-secondary-foreground">{current[0]}</h3><p className="mt-5 max-w-md leading-7 text-secondary-foreground/65">{current[1]}</p></div><img src={active < 2 ? media.press : active < 5 ? media.hero : media.quality} alt={`${current[0]} process`} width={1536} height={1024} loading="lazy" className="h-72 w-full object-cover md:h-full"/></div></div>;
 }
 
 export function ProductGrid({ compact = false }: { compact?: boolean }) {
