@@ -9,6 +9,7 @@ import {
   GalleryGrid,
   ProcessTimeline,
   ProductGrid,
+  ProductShowcase,
   SectionHeading,
   ServiceGrid,
 } from "@/components/sections";
@@ -311,32 +312,10 @@ function Index() {
       </section>
 
       {/* ─────────────────────────────────────────
-          PRODUCTS
+          PRODUCTS (Scroll-Driven Interactive Showcase)
       ───────────────────────────────────────── */}
 
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <SectionHeading
-            label="Our products"
-            title="Components made for demanding applications"
-          />
-
-          <ProductGrid compact />
-
-          <div className="mt-10">
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-            >
-              <Link to="/products">
-                View product catalogue
-                <ArrowRight />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <ProductShowcase />
 
       {/* ─────────────────────────────────────────
           GALLERY

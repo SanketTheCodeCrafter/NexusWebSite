@@ -53,3 +53,5 @@ export function FeatureStrip() {
 }
 
 export function CTASection() { return <section className="bg-primary"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-5 py-16 lg:flex-row lg:items-end lg:px-8"><div><p className="text-xs font-bold uppercase text-primary-foreground/65">Start a conversation</p><h2 className="mt-3 text-5xl font-extrabold uppercase leading-none text-primary-foreground lg:text-7xl">Let's build something precise.</h2><p className="mt-4 text-primary-foreground/70">Have a manufacturing requirement? Let's discuss your project.</p></div><Button asChild variant="secondary" size="lg" className="shrink-0"><Link to="/contact">Send an enquiry <ArrowRight/></Link></Button></div></section> }
+
+export { ProductShowcase } from "./product-showcase";
